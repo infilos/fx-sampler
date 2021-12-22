@@ -1,6 +1,6 @@
 --name ${app.name}
---icon ${project.resources[0].directory}/org/photoslide/img/linux/PhotoSlide.png
---resource-dir ${project.resources[0].directory}/org/photoslide/img/linux/pkgresource
+--icon ${project.resources[0].directory}/img/linux/PhotoSlide.png
+--resource-dir ${project.resources[0].directory}/img/linux/pkgresource
 --dest ${project.build.directory}
 --main-jar ${project.build.finalName}.jar
 --main-class ${mainClass}

@@ -3,8 +3,8 @@
 --win-menu
 --win-shortcut
 --vendor ${windows.vendor}
---icon ${project.resources[0].directory}\org\photoslide\img\win\PhotoSlide.ico
---resource-dir ${project.resources[0].directory}\org\photoslide\img\win\pkgresource
+--icon ${project.resources[0].directory}\img\win\PhotoSlide.ico
+--resource-dir ${project.resources[0].directory}\img\win\pkgresource
 --dest ${project.build.directory}
 --main-jar ${project.build.finalName}.jar
 --main-class ${mainClass}
