@@ -29,7 +29,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with Maven
-      run: mvn clean install -Ppackage -f ./pom.xml
+      run: mvn clean install -Ppackage -f pom.xml
         
     - name: Get release
       id: get_release
@@ -43,7 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        pattern: ./target/*.pkg
+        pattern: target/*.pkg
         release-url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,7 +66,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with Maven
-      run: mvn -B clean install -Ppackage -f ./pom.xml
+      run: mvn -B clean install -Ppackage -f pom.xml
         
     - name: Get release
       id: get_release
@@ -80,7 +80,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        pattern: .\target\*.msi
+        pattern: target\*.msi
         release-url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -103,7 +103,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Build with Maven
-      run: mvn clean install -Ppackage -f ./pom.xml
+      run: mvn clean install -Ppackage -f pom.xml
     
     - name: Get release
       id: get_release
@@ -117,6 +117,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        pattern: ./target/*.deb
+        pattern: target/*.deb
         release-url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
         github-token: ${{ secrets.GITHUB_TOKEN }}
