@@ -31,21 +31,14 @@ jobs:
     - name: Build with Maven
       run: mvn clean install -Ppackage -f pom.xml
         
-    - name: Get release
-      id: get_release
-      uses: bruceadams/get-release@v1.2.2
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-
-    - name: Upload Release Asset OSX
-      id: upload-release-asset 
-      uses: csexton/release-asset-action@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Update Automatic Release
+      uses: marvinpinto/action-automatic-releases@latest
       with:
-        pattern: target/*.pkg
-        release-url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: "${{ secrets.GITHUB_TOKEN}}"
+        automatic_release_tag: "macOS-latest"
+        prerelease: true
+        title: "macOS Development Build"
+        files: ./target/*.pkg
 
   build-win:
     
@@ -68,21 +61,14 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean install -Ppackage -f pom.xml
         
-    - name: Get release
-      id: get_release
-      uses: bruceadams/get-release@v1.2.2
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-        
-    - name: Upload Release Asset Win
-      id: upload-release-asset 
-      uses: csexton/release-asset-action@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Update Automatic Release
+      uses: marvinpinto/action-automatic-releases@latest
       with:
-        pattern: target\*.msi
-        release-url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: "${{ secrets.GITHUB_TOKEN}}"
+        automatic_release_tag: "Windows-latest"
+        prerelease: true
+        title: "Windows Development Build"
+        files: .\target\*.msi
 
   build-linux:
 
@@ -107,16 +93,15 @@ jobs:
     
     - name: Get release
       id: get_release
-      uses: bruceadams/get-release@v1.2.2
+      uses: bruceadams/get-release@v1.2.3
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
-    - name: Upload Release Asset Linux
-      id: upload-release-asset 
-      uses: csexton/release-asset-action@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Update Automatic Release
+      uses: marvinpinto/action-automatic-releases@latest
       with:
-        pattern: target/*.deb
-        release-url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: "${{ secrets.GITHUB_TOKEN}}"
+        automatic_release_tag: "Ubuntu-latest"
+        prerelease: true
+        title: "Ubuntu Development Build"
+        files: ./target/*.deb
